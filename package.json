@@ -1,0 +1,35 @@
+{
+  "name": "reas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "parse-n-write.js",
+  "bin": {
+    "reas": "./bin/reas-cli.js"
+  },
+  "scripts": {
+    "unpack": "webpack-unpack < ./Grammarly/Grammarly.js >> ./Grammarly/debundled.json",
+    "replace-exports": "ASM_PROJECT=Grammarly node ./src/replace-in-debundled.js",
+    "parse": "ASM_PROJECT=Grammarly node ./parse-n-write.js",
+    "interfaces": "ASM_PROJECT=Grammarly node ./require-interfaces.js",
+    "test": "jest"
+  },
+  "author": "Vladimir Metnew <vladimirmetnew@gmail.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "execa": "^1.0.0",
+    "filenamify": "^2.1.0",
+    "fs-extra": "^7.0.0",
+    "get-port": "^4.0.0",
+    "immutable": "^3.8.2",
+    "listr": "^0.14.2",
+    "lodash": "^4.17.11",
+    "opn": "^5.3.0",
+    "serve-handler": "^5.0.2",
+    "walkdir": "0.0.12",
+    "webpack-unpack": "^2.0.0",
+    "yargs": "^12.0.2"
+  },
+  "devDependencies": {
+    "prepack": "^0.2.51"
+  }
+}

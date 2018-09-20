@@ -1,0 +1,69 @@
+<head>
+    <link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet">
+    </link>
+    <script src="http://visjs.org/dist/vis.js"></script>
+
+</head>
+
+<body onload="draw()">
+    <div id="mynetwork"></div>
+    <script>
+        network = null;
+        layoutMethod = "directed";
+
+        function destroy() {
+            if (network !== null) {
+                network.destroy();
+                network = null;
+            }
+        }
+
+        function draw() {
+            destroy();
+            fetch('./result.json')
+                .then((res) => res.json())
+                .then((data) => {
+                    window.data = Object.keys(data).map((a) => data[a])
+                    var nodes = [];
+                    var edges = [];
+
+                    for (var i = 0; i < window.data.length; i++) {
+                        nodes.push({
+                            id: window.data[i].id,
+                            label: String(window.data[i].id)
+                        });
+                    }
+
+                    for (var i = 0; i < window.data.length; i++) {
+                        Object.keys(window.data[i].deps).forEach((elem) => {
+                            edges.push({
+                                to: elem,
+                                from: window.data[i].id
+                            });
+                        })
+                    }
+                    // create a network 
+                    var container = document.getElementById('mynetwork');
+                    var data = {
+                        nodes: nodes,
+                        edges: edges
+                    };
+                    console.log(data)
+                    var options = {
+                        layout: {
+                            hierarchical: {
+                                sortMethod: layoutMethod
+                            }
+                        },
+                        edges: {
+                            smooth: true,
+                            arrows: {
+                                to: true
+                            }
+                        }
+                    };
+                    network = new vis.Network(container, data, options);
+                })
+        }
+    </script>
+</body>
