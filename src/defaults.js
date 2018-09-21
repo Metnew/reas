@@ -32,6 +32,7 @@ const methods = {
                 preLengthTree: path.resolve(workspace, `pre-reas/reas.length.json`),
                 preRefsTree: path.resolve(workspace, `pre-reas/reas.refs.json`),
                 prePathsTree: path.resolve(workspace, `pre-reas/reas.paths.json`),
+                parentRefsTree: path.resolve(workspace, `pre-reas/reas.parents.json`),
                 // Data obtained after analysys
                 sources: path.resolve(workspace, `pre-sources`),
                 lengthTree: path.resolve(workspace, `reas/reas.length.json`),
